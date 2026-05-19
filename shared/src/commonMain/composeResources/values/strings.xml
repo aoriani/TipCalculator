@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screen_title">Tip</string>
+    <string name="result_total">TOTAL</string>
+    <string name="chip_tip_percentage">TIP (%s%%)</string>
+    <string name="bill_amount">BILL AMOUNT</string>
+    <string name="amount">$%s</string>
+</resources>
