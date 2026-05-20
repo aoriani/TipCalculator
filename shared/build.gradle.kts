@@ -19,10 +19,6 @@ kotlin {
         }
     }
 
-    compilerOptions {
-        freeCompilerArgs.add("-Xexplicit-backing-fields")
-    }
-
     jvm()
     
     js {
@@ -32,6 +28,10 @@ kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
+    }
+
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xexplicit-backing-fields", "-Xskip-prerelease-check", "-Xexpect-actual-classes")
     }
     
     androidLibrary {

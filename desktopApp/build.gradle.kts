@@ -6,6 +6,12 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xskip-prerelease-check", "-Xexplicit-backing-fields", "-Xexpect-actual-classes")
+    }
+}
+
 dependencies {
     implementation(projects.shared)
 

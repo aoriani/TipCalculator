@@ -7,12 +7,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import io.aoriani.tip.DollarAmount
 import io.aoriani.tip.ui.screens.calculator.components.BillAmountInput
 import io.aoriani.tip.ui.screens.calculator.components.ResultCard
 import io.aoriani.tip.ui.screens.calculator.components.TipPercentageChips
+import io.aoriani.tip.ui.theme.Dimens
 import io.aoriani.tip.ui.theme.TipTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,7 +53,7 @@ fun TipCalculatorScreen() {
                 navigationIcon = {
                     IconButton(onClick = {}) {
                         // Placeholder for Calculator Icon
-                        Box(modifier = Modifier.size(24.dp).padding(4.dp)) {
+                        Box(modifier = Modifier.size(Dimens.IconSizeSmall).padding(Dimens.SpacingSmall / 2)) {
                             Surface(
                                 modifier = Modifier.fillMaxSize(),
                                 color = MaterialTheme.colorScheme.onSecondary,
@@ -65,7 +65,7 @@ fun TipCalculatorScreen() {
                 actions = {
                     IconButton(onClick = {}) {
                         // Placeholder for Settings Icon
-                        Box(modifier = Modifier.size(24.dp).padding(4.dp)) {
+                        Box(modifier = Modifier.size(Dimens.IconSizeSmall).padding(Dimens.SpacingSmall / 2)) {
                             Surface(
                                 modifier = Modifier.fillMaxSize(),
                                 color = MaterialTheme.colorScheme.onSecondary,
@@ -84,10 +84,10 @@ fun TipCalculatorScreen() {
         Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(horizontal = 24.dp)
+                .padding(horizontal = Dimens.SpacingLarge)
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
 
             BillAmountInput(
                 value = billAmount,
@@ -95,7 +95,7 @@ fun TipCalculatorScreen() {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
 
             TipPercentageChips(
                 percentages = listOf(15, 18, 20, 25),
@@ -103,11 +103,11 @@ fun TipCalculatorScreen() {
                 onPercentageSelected = { selectedPercentage = it }
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.SpacingNormal)
             ) {
                 ResultCard(
                     label = "TIP ($selectedPercentage%)",
@@ -123,7 +123,7 @@ fun TipCalculatorScreen() {
                 )
             }
             
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
         }
     }
 }

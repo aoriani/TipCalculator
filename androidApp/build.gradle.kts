@@ -9,6 +9,7 @@ plugins {
 kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_11
+        freeCompilerArgs.addAll("-Xskip-prerelease-check", "-Xexplicit-backing-fields", "-Xexpect-actual-classes")
     }
 }
 dependencies {

@@ -7,6 +7,10 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xskip-prerelease-check", "-Xexplicit-backing-fields", "-Xexpect-actual-classes")
+    }
+
     js {
         browser()
         binaries.executable()
