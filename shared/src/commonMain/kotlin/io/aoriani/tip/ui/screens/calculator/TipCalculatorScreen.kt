@@ -10,9 +10,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import io.aoriani.tip.DollarAmount
-import io.aoriani.tip.ui.theme.BillAmountInput
-import io.aoriani.tip.ui.theme.ResultCard
-import io.aoriani.tip.ui.theme.TipPercentageChips
+import io.aoriani.tip.ui.screens.calculator.components.BillAmountInput
+import io.aoriani.tip.ui.screens.calculator.components.ResultCard
+import io.aoriani.tip.ui.screens.calculator.components.TipPercentageChips
 import io.aoriani.tip.ui.theme.TipTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

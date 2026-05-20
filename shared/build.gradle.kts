@@ -18,7 +18,11 @@ kotlin {
             isStatic = true
         }
     }
-    
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    }
+
     jvm()
     
     js {
