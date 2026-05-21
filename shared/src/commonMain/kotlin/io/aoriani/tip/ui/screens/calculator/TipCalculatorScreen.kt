@@ -47,7 +47,10 @@ fun TipCalculatorScreenPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TipCalculatorScreen() {
+fun TipCalculatorScreen(
+    state: TipUiState = TipUiState(),
+    onEvent: (TipUiEvent) -> Unit = {}
+) {
     var billAmount by remember { mutableStateOf("") }
     var selectedPercentage by remember { mutableStateOf(TipUiState.Percentage.Twenty) }
 
