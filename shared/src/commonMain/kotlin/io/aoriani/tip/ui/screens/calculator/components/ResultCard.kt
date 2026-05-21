@@ -13,7 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import io.aoriani.tip.ui.theme.Dimens
+import io.aoriani.tip.ui.theme.TipTheme
 import org.jetbrains.compose.resources.stringResource
 import tipcalculator.shared.generated.resources.Res
 import tipcalculator.shared.generated.resources.amount
@@ -62,5 +64,29 @@ fun ResultCard(
                 color = amountColor
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun ResultCardPrimaryPreview() {
+    TipTheme {
+        ResultCard(
+            label = "TIP (20%)",
+            amount = "10.00",
+            isPrimary = true
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ResultCardSecondaryPreview() {
+    TipTheme {
+        ResultCard(
+            label = "TOTAL",
+            amount = "60.00",
+            isPrimary = false
+        )
     }
 }
