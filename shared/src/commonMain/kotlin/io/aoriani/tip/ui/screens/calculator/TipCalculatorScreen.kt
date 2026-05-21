@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.aoriani.tip.ui.screens.calculator.components.BillAmountInput
 import io.aoriani.tip.ui.screens.calculator.components.ResultCard
 import io.aoriani.tip.ui.screens.calculator.components.TipPercentageChips
-import io.aoriani.tip.ui.screens.calculator.components.toStringResource
+//import io.aoriani.tip.ui.screens.calculator.components.toStringResource
 import io.aoriani.tip.ui.theme.Dimens
 import io.aoriani.tip.ui.theme.TipTheme
 import org.jetbrains.compose.resources.stringResource
@@ -43,8 +43,8 @@ fun TipCalculatorScreenPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TipCalculatorScreen(
-    state: TipUiState = TipUiState(),
-    onEvent: (TipUiEvent) -> Unit = {}
+//    state: TipUiState = TipUiState(),
+//    onEvent: (TipUiEvent) -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -74,22 +74,22 @@ fun TipCalculatorScreen(
             Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
 
             BillAmountInput(
-                value = state.amount,
-                onValueChange = { newAmount -> onEvent(TipUiEvent.NewAmountEvent(newAmount)) },
+                value = "100.0.", //state.amount,
+                onValueChange = {},//{ newAmount -> onEvent(TipUiEvent.NewAmountEvent(newAmount)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
 
             TipPercentageChips(
-                selectedPercentage = state.selectedPercentage,
-                onPercentageSelected = { newPercentage ->
-                    onEvent(
-                        TipUiEvent.NewPercentage(
-                            newPercentage
-                        )
-                    )
-                }
+                selectedPercentage = "15%",
+//                onPercentageSelected = { newPercentage ->
+//                    onEvent(
+//                        TipUiEvent.NewPercentage(
+//                            newPercentage
+//                        )
+//                    )
+//                }
             )
 
             Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
@@ -101,15 +101,15 @@ fun TipCalculatorScreen(
                 ResultCard(
                     label = stringResource(
                         Res.string.chip_tip_percentage,
-                        stringResource(state.selectedPercentage.toStringResource())
+                        "18%"//stringResource(state.selectedPercentage.toStringResource())
                     ),
-                    amount = state.tipValue.toString(),
+                    amount = "1.10",//state.tipValue.toString(),
                     modifier = Modifier.weight(1f),
                     isPrimary = true
                 )
                 ResultCard(
                     label = stringResource(Res.string.result_total),
-                    amount = state.totalValue.toString(),
+                    amount = "12.58",//"state.totalValue.toString()",
                     modifier = Modifier.weight(1f),
                     isPrimary = false
                 )

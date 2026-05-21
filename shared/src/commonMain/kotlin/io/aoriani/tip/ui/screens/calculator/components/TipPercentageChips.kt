@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import io.aoriani.tip.ui.screens.calculator.TipUiState
+//import io.aoriani.tip.ui.screens.calculator.TipUiState
 import io.aoriani.tip.ui.theme.Dimens
 import io.aoriani.tip.ui.theme.TipTheme
 import org.jetbrains.compose.resources.stringResource
@@ -26,26 +26,26 @@ import tipcalculator.shared.generated.resources.fifteen_percent
 import tipcalculator.shared.generated.resources.twenty_five_percent
 import tipcalculator.shared.generated.resources.twenty_percent
 
-@Composable
-@ReadOnlyComposable
-fun TipUiState.Percentage.toStringResource() = when (this) {
-    TipUiState.Percentage.Fifteen -> Res.string.fifteen_percent
-    TipUiState.Percentage.Eighteen -> Res.string.eighteen_percent
-    TipUiState.Percentage.Twenty -> Res.string.twenty_percent
-    TipUiState.Percentage.TwentyFive -> Res.string.twenty_five_percent
-}
+//@Composable
+//@ReadOnlyComposable
+//fun TipUiState.Percentage.toStringResource() = when (this) {
+//    TipUiState.Percentage.Fifteen -> Res.string.fifteen_percent
+//    TipUiState.Percentage.Eighteen -> Res.string.eighteen_percent
+//    TipUiState.Percentage.Twenty -> Res.string.twenty_percent
+//    TipUiState.Percentage.TwentyFive -> Res.string.twenty_five_percent
+//}
 
 @Composable
 fun TipPercentageChips(
-    selectedPercentage: TipUiState.Percentage,
-    onPercentageSelected: (TipUiState.Percentage) -> Unit,
+    selectedPercentage: String,
+//    onPercentageSelected: (TipUiState.Percentage) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(Dimens.SpacingMedium)
     ) {
-        TipUiState.Percentage.entries.forEach { percentage ->
+        listOf("15%", "18%", "20%", "25%").forEach { percentage ->
             val isSelected = percentage == selectedPercentage
             val backgroundColor = if (isSelected) {
                 MaterialTheme.colorScheme.secondary
@@ -64,11 +64,11 @@ fun TipPercentageChips(
                     .height(Dimens.ChipHeight)
                     .clip(RoundedCornerShape(Dimens.CornerRadiusLarge))
                     .background(backgroundColor)
-                    .clickable { onPercentageSelected(percentage) },
+                    .clickable {  },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = stringResource(percentage.toStringResource()),
+                    text = percentage,
                     style = MaterialTheme.typography.headlineMedium,
                     color = contentColor
                 )
@@ -82,8 +82,7 @@ fun TipPercentageChips(
 fun TipPercentageChipsPreview() {
     TipTheme {
         TipPercentageChips(
-            selectedPercentage = TipUiState.Percentage.Fifteen,
-            onPercentageSelected = {}
+            selectedPercentage = "15%",
         )
     }
 }
