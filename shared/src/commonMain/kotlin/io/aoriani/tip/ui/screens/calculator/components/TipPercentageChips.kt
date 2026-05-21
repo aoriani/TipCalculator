@@ -15,8 +15,11 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
 import io.aoriani.tip.ui.screens.calculator.TipUiState
 import io.aoriani.tip.ui.theme.Dimens
+import io.aoriani.tip.ui.theme.TipTheme
+import org.jetbrains.compose.resources.stringResource
 import tipcalculator.shared.generated.resources.Res
 import tipcalculator.shared.generated.resources.eighteen_percent
 import tipcalculator.shared.generated.resources.fifteen_percent
@@ -34,16 +37,15 @@ fun TipUiState.Percentage.toStringResource() = when (this) {
 
 @Composable
 fun TipPercentageChips(
-    percentages: List<Int>,
-    selectedPercentage: Int,
-    onPercentageSelected: (Int) -> Unit,
+    selectedPercentage: TipUiState.Percentage,
+    onPercentageSelected: (TipUiState.Percentage) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(Dimens.SpacingMedium)
     ) {
-        percentages.forEach { percentage ->
+        TipUiState.Percentage.entries.forEach { percentage ->
             val isSelected = percentage == selectedPercentage
             val backgroundColor = if (isSelected) {
                 MaterialTheme.colorScheme.secondary
@@ -66,11 +68,22 @@ fun TipPercentageChips(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "$percentage%",
+                    text = stringResource(percentage.toStringResource()),
                     style = MaterialTheme.typography.headlineMedium,
                     color = contentColor
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun TipPercentageChipsPreview() {
+    TipTheme {
+        TipPercentageChips(
+            selectedPercentage = TipUiState.Percentage.Fifteen,
+            onPercentageSelected = {}
+        )
     }
 }

@@ -27,8 +27,14 @@ import io.aoriani.tip.DollarAmount
 import io.aoriani.tip.ui.screens.calculator.components.BillAmountInput
 import io.aoriani.tip.ui.screens.calculator.components.ResultCard
 import io.aoriani.tip.ui.screens.calculator.components.TipPercentageChips
+import io.aoriani.tip.ui.screens.calculator.components.toStringResource
 import io.aoriani.tip.ui.theme.Dimens
 import io.aoriani.tip.ui.theme.TipTheme
+import org.jetbrains.compose.resources.stringResource
+import tipcalculator.shared.generated.resources.Res
+import tipcalculator.shared.generated.resources.chip_tip_percentage
+import tipcalculator.shared.generated.resources.result_total
+import tipcalculator.shared.generated.resources.screen_title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,12 +49,20 @@ fun TipCalculatorScreenPreview() {
 @Composable
 fun TipCalculatorScreen() {
     var billAmount by remember { mutableStateOf("") }
-    var selectedPercentage by remember { mutableStateOf(20) }
+    var selectedPercentage by remember { mutableStateOf(TipUiState.Percentage.Twenty) }
 
-    val billValue = try { DollarAmount(billAmount.ifBlank { "0" }) } catch (e: Exception) { DollarAmount("0") }
-    val tipRate = DollarAmount((selectedPercentage / 100.0).toString())
-    val tipValue = billValue * tipRate
-    val totalValue = billValue + tipValue
+    val billValue = try {
+        DollarAmount(billAmount.ifBlank { "0" })
+    } catch (e: Exception) {
+        DollarAmount("0")
+    }
+    val totalValue = billValue * selectedPercentage.value
+    val tipValue = billValue * when (selectedPercentage) {
+        TipUiState.Percentage.Fifteen -> DollarAmount("0.15")
+        TipUiState.Percentage.Eighteen -> DollarAmount("0.18")
+        TipUiState.Percentage.Twenty -> DollarAmount("0.20")
+        TipUiState.Percentage.TwentyFive -> DollarAmount("0.25")
+    }
 
     val formattedTip = tipValue.toString()
     val formattedTotal = totalValue.toString()
@@ -58,7 +72,7 @@ fun TipCalculatorScreen() {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Tip",
+                        stringResource(Res.string.screen_title),
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold
                         ),
@@ -89,7 +103,6 @@ fun TipCalculatorScreen() {
             Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
 
             TipPercentageChips(
-                percentages = listOf(15, 18, 20, 25),
                 selectedPercentage = selectedPercentage,
                 onPercentageSelected = { selectedPercentage = it }
             )
@@ -101,19 +114,22 @@ fun TipCalculatorScreen() {
                 horizontalArrangement = Arrangement.spacedBy(Dimens.SpacingNormal)
             ) {
                 ResultCard(
-                    label = "TIP ($selectedPercentage%)",
+                    label = stringResource(
+                        Res.string.chip_tip_percentage,
+                        stringResource(selectedPercentage.toStringResource())
+                    ),
                     amount = formattedTip,
                     modifier = Modifier.weight(1f),
                     isPrimary = true
                 )
                 ResultCard(
-                    label = "TOTAL",
+                    label = stringResource(Res.string.result_total),
                     amount = formattedTotal,
                     modifier = Modifier.weight(1f),
                     isPrimary = false
                 )
             }
-            
+
             Spacer(modifier = Modifier.height(Dimens.SpacingXLarge))
         }
     }

@@ -2,11 +2,11 @@
 <resources>
     <string name="screen_title">Tip</string>
     <string name="result_total">TOTAL</string>
-    <string name="chip_tip_percentage">TIP (%s%%)</string>
+    <string name="chip_tip_percentage">TIP (%1$s)</string>
     <string name="bill_amount">BILL AMOUNT</string>
     <string name="amount">$%s</string>
-    <string name="fifteen_percent">15%%</string>
-    <string name="eighteen_percent">18%%</string>
-    <string name="twenty_percent">20%%</string>
-    <string name="twenty_five_percent">25%%</string>
+    <string name="fifteen_percent">15%</string>
+    <string name="eighteen_percent">18%</string>
+    <string name="twenty_percent">20%</string>
+    <string name="twenty_five_percent">25%</string>
 </resources>

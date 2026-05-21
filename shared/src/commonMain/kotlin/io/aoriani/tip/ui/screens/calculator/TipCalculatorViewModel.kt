@@ -1,24 +1,33 @@
 package io.aoriani.tip.ui.screens.calculator
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import io.aoriani.tip.DollarAmount
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
+@Immutable
 data class TipUiState(
     val amount: String = "",
     val selectedPercentage: Percentage = Percentage.Fifteen,
 ) {
     enum class Percentage(val value: DollarAmount) {
-        Fifteen(value = DollarAmount("1.15")),
-        Eighteen(value = DollarAmount("1.18")),
-        Twenty(value = DollarAmount("1.20"),),
-        TwentyFive(value = DollarAmount("1.25"))
+        Fifteen(value = DollarAmount("0.15")),
+        Eighteen(value = DollarAmount("0.18")),
+        Twenty(value = DollarAmount("0.20")),
+        TwentyFive(value = DollarAmount("0.25"))
     }
 
-    val total: DollarAmount = amount.takeIf { it.matches(COMPLETE_DOLLAR_AMOUNT_REGEX) }
+    @Stable
+    val tipValue: DollarAmount = amount.takeIf { it.matches(COMPLETE_DOLLAR_AMOUNT_REGEX) }
         ?.let { DollarAmount(it) * selectedPercentage.value }
+        ?: DollarAmount("0.00")
+
+    @Stable
+    val totalValue: DollarAmount = amount.takeIf { it.matches(COMPLETE_DOLLAR_AMOUNT_REGEX) }
+        ?.let { DollarAmount(it) + tipValue }
         ?: DollarAmount("0.00")
 }
 
