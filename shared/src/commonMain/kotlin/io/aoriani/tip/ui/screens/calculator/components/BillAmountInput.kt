@@ -15,8 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import io.aoriani.tip.ui.theme.Dimens
 import io.aoriani.tip.ui.theme.NumberXl
+import io.aoriani.tip.ui.theme.TipTheme
 import org.jetbrains.compose.resources.stringResource
 import tipcalculator.shared.generated.resources.Res
 import tipcalculator.shared.generated.resources.bill_amount
@@ -66,5 +68,27 @@ fun BillAmountInput(
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun BillAmountInputEmptyPreview() {
+    TipTheme {
+        BillAmountInput(
+            value = "",
+            onValueChange = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun BillAmountInputFilledPreview() {
+    TipTheme {
+        BillAmountInput(
+            value = "123.45",
+            onValueChange = {}
+        )
     }
 }
