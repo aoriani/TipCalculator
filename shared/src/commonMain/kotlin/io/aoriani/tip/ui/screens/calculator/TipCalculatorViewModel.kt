@@ -20,20 +20,22 @@ data class TipUiState(
         TwentyFive(value = DollarAmount("0.25"))
     }
 
+    private val baseAmount: DollarAmount? = amount
+        .takeIf { it.matches(COMPLETE_DOLLAR_AMOUNT_REGEX) }
+        ?.let { DollarAmount(it) }
+
     @Stable
-    val tipValue: DollarAmount = amount.takeIf { it.matches(COMPLETE_DOLLAR_AMOUNT_REGEX) }
-        ?.let { DollarAmount(it) * selectedPercentage.value }
+    val tipValue: DollarAmount = baseAmount?.let { it * selectedPercentage.value }
         ?: DollarAmount("0.00")
 
     @Stable
-    val totalValue: DollarAmount = amount.takeIf { it.matches(COMPLETE_DOLLAR_AMOUNT_REGEX) }
-        ?.let { DollarAmount(it) + tipValue }
+    val totalValue: DollarAmount = baseAmount?.let { it + tipValue }
         ?: DollarAmount("0.00")
 }
 
 sealed interface TipUiEvent {
-    class NewAmountEvent(val amount: String) : TipUiEvent
-    class NewPercentage(val percentage: TipUiState.Percentage) : TipUiEvent
+    data class NewAmountEvent(val amount: String) : TipUiEvent
+    data class NewPercentage(val percentage: TipUiState.Percentage) : TipUiEvent
 }
 
 private val COMPLETE_DOLLAR_AMOUNT_REGEX = Regex("""^-?\d+(\.\d{1,2})?$""")
