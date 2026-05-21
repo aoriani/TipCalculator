@@ -67,9 +67,6 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-        webMain.dependencies {
-            implementation(npm("big.js", "7.0.1"))
-        }
         jsMain.dependencies {
             implementation(libs.wrappers.browser)
         }
